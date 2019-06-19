@@ -393,7 +393,7 @@ public class LoginActivity extends AppCompatActivity {
                                 intent.putExtra("phone", employee.getPhone());
                                 intent.putExtra("status", employee.getStatus());
                                 intent.putExtra("type", employee.getType());
-                                intent.putExtra("lastNews", employee.getLastNews());
+                                intent.putExtra("lastNews", employee.getLastNews());;
                                 intent.putExtra("lastTask", employee.getLastTask());
                                 intent.putExtra("lastEvent", employee.getLastEvent());
                                 intent.putExtra("isLogin", true);
