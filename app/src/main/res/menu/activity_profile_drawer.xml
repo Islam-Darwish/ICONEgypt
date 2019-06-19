@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="Profile" />
+        <item
+            android:id="@+id/nav_news"
+            android:icon="@drawable/ic_news"
+            android:title="News" />
+        <item
+            android:id="@+id/nav_task"
+            android:icon="@drawable/ic_tasks"
+            android:title="Tasks" />
+        <item
+            android:id="@+id/nav_form"
+            android:icon="@drawable/ic_forms"
+            android:title="Form" />
+        <!--
+        <item
+            android:id="@+id/nav_finger_print"
+            android:icon="@drawable/ic_finger_print"
+            android:title="Finger Print" />
+        <item
+            android:id="@+id/nav_activity"
+            android:icon="@drawable/ic_activity"
+            android:title="Activity" />
+        -->
+
+        <item
+            android:id="@+id/nav_events"
+            android:icon="@drawable/ic_events"
+            android:title="Events" />
+
+        <item
+            android:id="@+id/nav_employee"
+            android:icon="@drawable/ic_employee"
+            android:title="Employee" />
+        </group>
+
+    <item android:title="Settings">
+        <menu>
+            <item
+                android:id="@+id/nav_signout"
+                android:icon="@drawable/ic_signout"
+                android:title="Sign Out" />
+        </menu>
+    </item>
+
+</menu>
