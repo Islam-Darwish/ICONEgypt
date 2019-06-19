@@ -30,6 +30,8 @@ import com.mixapplications.iconegypt.models.Tasks;
 
 import java.util.ArrayList;
 
+import static com.mixapplications.iconegypt.models.AppData.currentUser;
+
 public class MyTasksTabFragment extends Fragment {
 
     public RecyclerView mRecyclerView;
@@ -62,12 +64,16 @@ public class MyTasksTabFragment extends Fragment {
 
         final ArrayList<Tasks> myTasksArrayList = new ArrayList<>();
         final TasksAdapter[] myTasksAdapter = new TasksAdapter[1];
+        final Tasks[] lastTask = {null};
 
         Query aFireQuery = ref.child("tasks").orderByChild("timestamp");
         aFireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (lastTask[0] == null || (snapshot.getValue(Tasks.class) != null && lastTask[0].getTimestamp() > snapshot.getValue(Tasks.class).getTimestamp()))
+                        lastTask[0] = snapshot.getValue(Tasks.class);
+
                     final Tasks task = snapshot.getValue(Tasks.class);
                     if (task.getToEmployee().getEmail().equalsIgnoreCase(AppData.currentUser.getEmail())) {
                         myTasksArrayList.add(task);
@@ -91,6 +97,29 @@ public class MyTasksTabFragment extends Fragment {
                     }
                 });
                 mRecyclerView.setAdapter(myTasksAdapter[0]);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (lastTask[0] != null) {
+                            Query fireQuery = ref.child("employees").orderByChild("email").equalTo(currentUser.getEmail());
+                            fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
+                                        MainFragment.setRedDotVisibility(context, 0, false);
+                                        snapshot1.getRef().child("lastTask").setValue(lastTask[0].getTimestamp());
+                                        break;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+                }).start();
             }
 
             @Override

@@ -115,7 +115,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
 
 
-        if (currentUser != null && remoteMessage.getFrom().substring(remoteMessage.getFrom().lastIndexOf("/") + 1).equalsIgnoreCase("notifications_events")) {
+        if (remoteMessage.getFrom().substring(remoteMessage.getFrom().lastIndexOf("/") + 1).equalsIgnoreCase("notifications_events")) {
             final Context context = this;
             FirebaseDatabase database;
             DatabaseReference ref;
@@ -136,7 +136,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                                         !remoteMessage.getData().get("fromEmployee").equalsIgnoreCase(currentUser.getEmail())) {
                                     boolean isMine = false;
                                     for (Employee employee : event.getToEmployee()) {
-                                        if (employee.getEmail().equalsIgnoreCase(AppData.employee.getEmail()))
+                                        if (employee.getEmail().equalsIgnoreCase(currentUser.getEmail()))
                                             isMine = true;
                                     }
                                     if (isMine) {
@@ -152,7 +152,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                                         }
                                         if (AppData.currentUser != null) {
                                             intent = new Intent(context, SelectActivity.class);
-                                            fragment = "tasks";
+                                            fragment = "events";
                                         } else {
                                             intent = new Intent(context, SplashScreen.class);
                                             fragment = "";

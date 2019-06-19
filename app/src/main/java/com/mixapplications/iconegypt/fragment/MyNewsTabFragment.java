@@ -1,15 +1,17 @@
 package com.mixapplications.iconegypt.fragment;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,24 +23,28 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mixapplications.iconegypt.R;
-import com.mixapplications.iconegypt.adapters.SentNewsAdapter;
-import com.mixapplications.iconegypt.dialogs.CreateNewsCustomDialog;
+import com.mixapplications.iconegypt.adapters.NewsAdapter;
+import com.mixapplications.iconegypt.dialogs.ViewNewsCustomDialog;
 import com.mixapplications.iconegypt.models.AppData;
+import com.mixapplications.iconegypt.models.Employee;
 import com.mixapplications.iconegypt.models.News;
+import com.mixapplications.iconegypt.models.Prefs;
 
 import java.util.ArrayList;
+
+import static com.mixapplications.iconegypt.models.AppData.currentUser;
 
 public class MyNewsTabFragment extends Fragment {
 
     public RecyclerView mRecyclerView;
     Context context;
-    AppCompatActivity activity;
+    Activity activity;
     FirebaseDatabase database;
     DatabaseReference ref;
     ArrayList<News> newsArrayList = new ArrayList<>();
-    SentNewsAdapter adapter;
+    ArrayList<Employee> employeeArrayList = new ArrayList<>();
+    NewsAdapter adapter;
     AlertDialog dialog;
-    ImageButton fab;
     private RecyclerView.LayoutManager mLayoutManager;
 
     public MyNewsTabFragment() {
@@ -51,48 +57,100 @@ public class MyNewsTabFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_my_news_tab, container, false);
         mRecyclerView = layout.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
+
         mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        fab = layout.findViewById(R.id.fab_add);
+
         context = getContext();
-        activity = (AppCompatActivity) getActivity();
+        activity = getActivity();
 
         //setProgressDialog();
         database = FirebaseDatabase.getInstance();
         ref = database.getReference();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new CreateNewsCustomDialog(ref, activity, context, AppData.employee).show();
-            }
-        });
-
+        final News[] lastNews = {null};
         Query aFireQuery = ref.child("news").orderByChild("timestamp");
         aFireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (lastNews[0] == null || (snapshot.getValue(News.class) != null && lastNews[0].getTimestamp() > snapshot.getValue(News.class).getTimestamp()))
+                        lastNews[0] = snapshot.getValue(News.class);
 
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    News news = snapshot.getValue(News.class);
-                    if (news.getFromEmail().equalsIgnoreCase(AppData.employee.getEmail())) {
-                        newsArrayList.add(snapshot.getValue(News.class));
+                    final News news = snapshot.getValue(News.class);
+                    newsArrayList.add(news);
+                    Query fireQuery = ref.child("employees").orderByChild("email").equalTo(news.getFromEmail());
+                    fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
+                                Employee em = snapshot1.getValue(Employee.class);
+                                employeeArrayList.add(em);
+                                adapter = new NewsAdapter(context, activity, newsArrayList, employeeArrayList);
+                                adapter.setOnItemClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) v.getTag();
+                                        int position = viewHolder.getAdapterPosition();
+                                        ViewNewsCustomDialog dialog = new ViewNewsCustomDialog(activity, newsArrayList.get(position), employeeArrayList.get(position));
+                                        try {
+                                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                                            dialog.show();
+                                        } catch (Exception e) {
+                                            dialog.show();
+                                        }
 
-                        adapter = new SentNewsAdapter(context, ref, activity, newsArrayList);
-                        mRecyclerView.setAdapter(adapter);
-                        if (dialog != null)
-                            dialog.dismiss();
-                    }
+                                    }
+                                });
+                            }
+                            mRecyclerView.setAdapter(adapter);
+                            if (dialog != null)
+                                dialog.dismiss();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            if (dialog != null)
+                                dialog.dismiss();
+                        }
+                    });
                 }
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (lastNews[0] != null) {
+                            Query fireQuery = ref.child("employees").orderByChild("email").equalTo(currentUser.getEmail());
+                            fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
+                                        MainFragment.setRedDotVisibility(context, 0, false);
+                                        snapshot1.getRef().child("lastNews").setValue(lastNews[0].getTimestamp());
+                                        break;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+                }).start();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                if (dialog != null)
-                    dialog.dismiss();
+
             }
         });
 
+
+        Prefs.initPrefs(context, "icon_egypt", Context.MODE_PRIVATE);
+        Prefs.putBoolean(AppData.currentUser.getEmail() + "-news", false);
         return layout;
     }
 }

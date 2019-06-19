@@ -43,7 +43,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.employee_recycleview, null);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_employee_recycleview, null);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(lp);
         return new CustomViewHolder(view);
@@ -55,7 +55,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
         customViewHolder.tvEmail.setText(arrayDetails.get(i).getEmail());
         customViewHolder.tvPhone.setText(arrayDetails.get(i).getPhone());
         customViewHolder.tvType.setText((arrayDetails.get(i).getType().substring(0, 1).toUpperCase() + arrayDetails.get(i).getType().substring(1)));
-        customViewHolder.tvStatus.setText(arrayDetails.get(i).getStatus());
+        /*customViewHolder.tvStatus.setText(arrayDetails.get(i).getStatus());
         if (customViewHolder.tvStatus.getText().toString().equalsIgnoreCase("available")) {
             customViewHolder.tvStatus.setTextColor(0xff00ff00);
         } else if (customViewHolder.tvStatus.getText().toString().equalsIgnoreCase("busy")) {
@@ -64,7 +64,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
             customViewHolder.tvStatus.setTextColor(0xffeb0000);
         } else if (customViewHolder.tvStatus.getText().toString().equalsIgnoreCase("holiday")) {
             customViewHolder.tvStatus.setTextColor(0xffeb0000);
-        }
+        }*/
 
         Picasso.get().load(arrayDetails.get(i).getImage().equals("") ? null : arrayDetails.get(i).getImage())
                 .placeholder(R.drawable.ic_employee).into(customViewHolder.imgView);
@@ -101,7 +101,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
             tvPhone = view.findViewById(R.id.tvPhone);
             imgView = view.findViewById(R.id.imgView);
             callBtn = view.findViewById(R.id.btn_call);
-            tvStatus = view.findViewById(R.id.tvStatus);
+            // tvStatus = view.findViewById(R.id.tvStatus);
         }
     }
 

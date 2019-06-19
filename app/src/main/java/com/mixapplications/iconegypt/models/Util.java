@@ -40,9 +40,9 @@ import com.mixapplications.iconegypt.fragment.MyEventsTabFragment;
 import com.mixapplications.iconegypt.fragment.MyNewsTabFragment;
 import com.mixapplications.iconegypt.fragment.MyTasksTabFragment;
 import com.mixapplications.iconegypt.fragment.NewsFragment;
-import com.mixapplications.iconegypt.fragment.NewsTabFragment;
 import com.mixapplications.iconegypt.fragment.SendEventsTabFragment;
 import com.mixapplications.iconegypt.fragment.SendTasksTabFragment;
+import com.mixapplications.iconegypt.fragment.SentNewsTabFragment;
 import com.mixapplications.iconegypt.fragment.TasksFragment;
 
 import java.text.ParseException;
@@ -128,10 +128,10 @@ public class Util {
                                             }
                                         });
                                     }
-                                    //NewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
+                                    //MyNewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
                                     Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                                     if (currentFragment instanceof NewsFragment) {
-                                        ((NewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
+                                        ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
                                     }
                                 }
 
@@ -180,10 +180,10 @@ public class Util {
                                     dialog[0].dismiss();
                             }
                         }
-                        //MyNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
+                        //SentNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
                         Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                         if (currentFragment instanceof NewsFragment) {
-                            ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
+                            ((SentNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
                         }
                     }
 
@@ -247,10 +247,10 @@ public class Util {
                                                         }
                                                     });
                                                 }
-                                                //NewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
+                                                //MyNewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
                                                 Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                                                 if (currentFragment instanceof NewsFragment) {
-                                                    ((NewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
+                                                    ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
                                                 }
                                             }
 
@@ -299,10 +299,10 @@ public class Util {
                                                 dialog[0].dismiss();
                                         }
                                     }
-                                    //MyNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
+                                    //SentNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
                                     Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                                     if (currentFragment instanceof NewsFragment) {
-                                        ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
+                                        ((SentNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
                                     }
                                 }
 
@@ -374,11 +374,11 @@ public class Util {
                                                         }
                                                     });
                                                 }
-                                                //NewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
+                                                //MyNewsTabFragment.mRecyclerView.setAdapter(adapter[0]);
 
                                                 Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                                                 if (currentFragment instanceof NewsFragment) {
-                                                    ((NewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
+                                                    ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(0)).mRecyclerView.setAdapter(adapter[0]);
                                                 }
                                             }
 
@@ -397,10 +397,10 @@ public class Util {
                                         }
 
                                     }
-                                    //MyNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
+                                    //SentNewsTabFragment.mRecyclerView.setAdapter(myNewsAdapter[0]);
                                     Fragment currentFragment = activity.getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
                                     if (currentFragment instanceof NewsFragment) {
-                                        ((MyNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
+                                        ((SentNewsTabFragment) ((NewsFragment) currentFragment).fragmentAdapter.getItem(1)).mRecyclerView.setAdapter(myNewsAdapter[0]);
                                     }
                                 }
 

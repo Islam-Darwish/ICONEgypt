@@ -48,8 +48,8 @@ public class NewsFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
 
         fragmentAdapter = new FragmentAdapter(getChildFragmentManager());
-        fragmentAdapter.addFragment(new NewsTabFragment(), "News");
-        fragmentAdapter.addFragment(new MyNewsTabFragment(), "My News");
+        fragmentAdapter.addFragment(new MyNewsTabFragment(), "News");
+        fragmentAdapter.addFragment(new SentNewsTabFragment(), "My News");
         viewPager.setAdapter(fragmentAdapter);
     }
 }

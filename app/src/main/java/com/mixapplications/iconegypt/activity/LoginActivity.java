@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -93,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         overridePendingTransition(0, 0);
         View relativeLayout = findViewById(R.id.login_container);
@@ -104,6 +105,8 @@ public class LoginActivity extends AppCompatActivity {
         username_txt = findViewById(R.id.username_txt);
         btn_continue = findViewById(R.id.btn_continue);
         btn_logout = findViewById(R.id.btn_logout);
+        final Space space_login = findViewById(R.id.space_login);
+        final Space space_login1 = findViewById(R.id.space_login1);
         final EditText userName = findViewById(R.id.username_edit_text);
         final EditText passWord = findViewById(R.id.password_edit_text);
         btnLogin = findViewById(R.id.btn_login);
@@ -134,6 +137,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (currentUser != null) {
+            space_login.setVisibility(View.GONE);
+            space_login1.setVisibility(View.GONE);
             userName.setVisibility(View.GONE);
             passWord.setVisibility(View.GONE);
             btnLogin.setVisibility(View.GONE);
@@ -146,6 +151,8 @@ public class LoginActivity extends AppCompatActivity {
             }
             profileImage.setVisibility(View.VISIBLE);
         } else {
+            space_login.setVisibility(View.VISIBLE);
+            space_login1.setVisibility(View.VISIBLE);
             userName.setVisibility(View.VISIBLE);
             passWord.setVisibility(View.VISIBLE);
             btnLogin.setVisibility(View.VISIBLE);
@@ -158,6 +165,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 signOut();
+                space_login.setVisibility(View.VISIBLE);
+                space_login1.setVisibility(View.VISIBLE);
                 userName.setVisibility(View.VISIBLE);
                 passWord.setVisibility(View.VISIBLE);
                 btnLogin.setVisibility(View.VISIBLE);

@@ -216,9 +216,33 @@ public class SelectActivity extends AppCompatActivity
         if (allEmployeeNode == null || myEmployeeNode == null) {
             String nodeJson = (String) getIntent().getExtras().get("nodeJson");
             Gson gson = new Gson();
-            EmployeeFirebaseNode employeeFirebaseNode = gson.fromJson(nodeJson, EmployeeFirebaseNode.class);
-            allEmployeeNode = employeeFirebaseNode.toEmployeeNode();
-            myEmployeeNode = allEmployeeNode.findChild(employee.getEmail());
+            if (nodeJson != null) {
+                EmployeeFirebaseNode employeeFirebaseNode = gson.fromJson(nodeJson, EmployeeFirebaseNode.class);
+                allEmployeeNode = employeeFirebaseNode.toEmployeeNode();
+                myEmployeeNode = allEmployeeNode.findChild(employee.getEmail());
+            } else {
+                if (ref != null) {
+                    Query afireQuery = ref.child("employees_tree");
+                    afireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                                String nodeJson = dataSnapshot2.getValue(String.class);
+                                Gson gson = new Gson();
+                                EmployeeFirebaseNode employeeFirebaseNode = gson.fromJson(nodeJson, EmployeeFirebaseNode.class);
+                                allEmployeeNode = employeeFirebaseNode.toEmployeeNode();
+                                myEmployeeNode = allEmployeeNode.findChild(employee.getEmail());
+                                break;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -709,7 +733,7 @@ public class SelectActivity extends AppCompatActivity
                 } else if (((String) intent.getExtras().get("fragment")).equalsIgnoreCase("tasks")) {
                     setFragment(new TasksFragment(), true, "tasks_fragment");
                 } else if (((String) intent.getExtras().get("fragment")).equalsIgnoreCase("events")) {
-                    setFragment(new TasksFragment(), true, "events_fragment");
+                    setFragment(new EventsFragment(), true, "events_fragment");
                 }
             }
         }

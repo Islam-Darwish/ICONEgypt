@@ -30,6 +30,8 @@ import com.mixapplications.iconegypt.models.Prefs;
 
 import java.util.ArrayList;
 
+import static com.mixapplications.iconegypt.models.AppData.currentUser;
+
 public class MyEventsTabFragment extends Fragment {
 
     public RecyclerView mRecyclerView;
@@ -62,12 +64,17 @@ public class MyEventsTabFragment extends Fragment {
 
         final ArrayList<Events> myEventsArrayList = new ArrayList<>();
         final EventsAdapter[] myEventsAdapter = new EventsAdapter[1];
+        final Events[] lastEvents = {null};
 
         Query aFireQuery = ref.child("events").orderByChild("timestamp");
         aFireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (final DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    if (lastEvents[0] == null || (snapshot.getValue(Events.class) != null && lastEvents[0].getTimestamp() > snapshot.getValue(Events.class).getTimestamp()))
+                        lastEvents[0] = snapshot.getValue(Events.class);
+
+
                     final Events event = snapshot.getValue(Events.class);
                     if (event != null && event.getToEmployee() != null && event.getToEmployee().indexOf(AppData.employee) > -1) {
                         myEventsArrayList.add(event);
@@ -91,6 +98,30 @@ public class MyEventsTabFragment extends Fragment {
                     }
                 });
                 mRecyclerView.setAdapter(myEventsAdapter[0]);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (lastEvents[0] != null) {
+                            Query fireQuery = ref.child("employees").orderByChild("email").equalTo(currentUser.getEmail());
+                            fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot1 : dataSnapshot.getChildren()) {
+                                        MainFragment.setRedDotVisibility(context, 0, false);
+                                        snapshot1.getRef().child("lastEvent").setValue(lastEvents[0].getTimestamp());
+                                        break;
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+                }).start();
+
             }
 
             @Override
