@@ -37,7 +37,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
         this.activity = activity;
     }
 
-
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 
