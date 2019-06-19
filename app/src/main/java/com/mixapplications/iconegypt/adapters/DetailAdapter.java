@@ -24,9 +24,6 @@ import java.util.ArrayList;
 
 import agency.tango.android.avatarview.views.AvatarView;
 
-/**
- * Created by sotsys-219 on 23/8/16.
- */
 public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomViewHolder> {
 
     private static final int REQUEST_PHONE_CALL = 1;
@@ -40,6 +37,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
         this.context = context;
         this.activity = activity;
     }
+
 
     @Override
     public CustomViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -56,7 +54,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
         customViewHolder.tvEmail.setText(arrayDetails.get(i).getEmail());
         customViewHolder.tvPhone.setText(arrayDetails.get(i).getPhone());
         customViewHolder.tvType.setText((arrayDetails.get(i).getType().substring(0, 1).toUpperCase() + arrayDetails.get(i).getType().substring(1)));
-        /*customViewHolder.tvStatus.setText(arrayDetails.get(i).getStatus());
+        /*//customViewHolder.tvStatus.setText(arrayDetails.get(i).getStatus());
         if (customViewHolder.tvStatus.getText().toString().equalsIgnoreCase("available")) {
             customViewHolder.tvStatus.setTextColor(0xff00ff00);
         } else if (customViewHolder.tvStatus.getText().toString().equalsIgnoreCase("busy")) {
