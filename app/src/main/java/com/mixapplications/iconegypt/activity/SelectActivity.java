@@ -55,10 +55,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.Gson;
 import com.mixapplications.iconegypt.R;
-import com.mixapplications.iconegypt.fragment.ActivityFragment;
 import com.mixapplications.iconegypt.fragment.EmployeeFragment;
 import com.mixapplications.iconegypt.fragment.EventsFragment;
-import com.mixapplications.iconegypt.fragment.FingerPrintFragment;
 import com.mixapplications.iconegypt.fragment.FormsFragment;
 import com.mixapplications.iconegypt.fragment.MainFragment;
 import com.mixapplications.iconegypt.fragment.NewsFragment;
@@ -126,12 +124,15 @@ public class SelectActivity extends AppCompatActivity
         txt_name = hView.findViewById(R.id.txt_name);
         setSupportActionBar(toolbar);
         FirebaseApp customApp = FirebaseApp.initializeApp(this);
+
+        assert customApp != null;
         firebaseStorage = FirebaseStorage.getInstance(customApp);
         mainRef = firebaseStorage.getReference();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         mDataBase = FirebaseDatabase.getInstance();
         ref = mDataBase.getReference();
+        assert getIntent().getExtras() != null;
         isLogin = (boolean) getIntent().getExtras().get("isLogin");
         try {
             employee = new Employee();
@@ -153,10 +154,10 @@ public class SelectActivity extends AppCompatActivity
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                         for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
                             employee = snapshot1.getValue(Employee.class);
-                            if (employee.getImage() != null && !employee.getImage().equals("")) {
+                            if (employee != null && employee.getImage() != null && !employee.getImage().equals("")) {
                                 Picasso.get().load(employee.getImage()).placeholder(R.drawable.profile_placeholder).into(profileImage);
                             }
-                            txt_name.setText(employee.getName() != null ? employee.getName() : "");
+                            txt_name.setText(employee != null && employee.getName() != null ? employee.getName() : "");
                             txt_email.setText(employee.getEmail() != null ? employee.getEmail() : "");
 
                             break;
@@ -180,7 +181,7 @@ public class SelectActivity extends AppCompatActivity
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
                         for (DataSnapshot snapshot1 : dataSnapshot1.getChildren()) {
                             employee = snapshot1.getValue(Employee.class);
-                            if (employee.getImage() != null && !employee.getImage().equals("")) {
+                            if (employee != null && employee.getImage() != null && !employee.getImage().equals("")) {
                                 Picasso.get().load(employee.getImage()).placeholder(R.drawable.profile_placeholder).into(profileImage);
                             }
                             txt_name.setText(employee.getName() != null ? employee.getName() : "");
@@ -204,7 +205,7 @@ public class SelectActivity extends AppCompatActivity
         txt_name.setText(employee.getName() != null ? employee.getName() : "");
         txt_email.setText(employee.getEmail() != null ? employee.getEmail() : "");
         setFragment(new MainFragment(), false, "main_fragment");
-        if (getIntent().getExtras().get("fragment") != null && !getIntent().getExtras().get("fragment").equals("")) {
+        if (getIntent().getExtras() != null && getIntent().getExtras().get("fragment") != null && !getIntent().getExtras().get("fragment").equals("")) {
             if (currentUser != null) {
                 if (((String) getIntent().getExtras().get("fragment")).equalsIgnoreCase("news")) {
                     setFragment(new NewsFragment(), true, "news_fragment");
@@ -433,16 +434,16 @@ public class SelectActivity extends AppCompatActivity
                         } else if (current instanceof NewsFragment) {
                             navigationView.setCheckedItem(R.id.nav_news);
                             fragmentTag = "news_fragment";
-                        } else if (current instanceof FingerPrintFragment) {
-                            //navigationView.setCheckedItem(R.id.nav_finger_print);
-                            fragmentTag = "finger_print_fragment";
                         } else if (current instanceof EventsFragment) {
                             navigationView.setCheckedItem(R.id.nav_events);
                             fragmentTag = "events_fragment";
-                        } else if (current instanceof ActivityFragment) {
+                        } /*else if (current instanceof ActivityFragment) {
                             //navigationView.setCheckedItem(R.id.nav_activity);
                             fragmentTag = "activity_fragment";
-                        } else {
+                        }else if (current instanceof FingerPrintFragment) {
+                            //navigationView.setCheckedItem(R.id.nav_finger_print);
+                            fragmentTag = "finger_print_fragment";
+                        } */ else {
                             setFragment(new MainFragment(), false, "main_fragment");
                         }
                     }
