@@ -100,7 +100,7 @@ public class CreateEventCustomDialog extends AlertDialog implements
         }
 
         for (EmployeeNode employeeNode : listOfNodes) {
-            Query fireQuery =  ref.child("employees").orderByChild("email").equalTo(employeeNode.getEmail());
+            Query fireQuery = ref.child("employees").orderByChild("email").equalTo(employeeNode.getEmail());
             fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {
@@ -108,7 +108,7 @@ public class CreateEventCustomDialog extends AlertDialog implements
                         Employee em = snapshot1.getValue(Employee.class);
                         listOfEmployee.add(em);
                     }
-                    if(listOfEmployee.size() == listOfNodes.size()){
+                    if (listOfEmployee.size() == listOfNodes.size()) {
 
 
                         for (Employee e : listOfEmployee) {
@@ -136,7 +136,7 @@ public class CreateEventCustomDialog extends AlertDialog implements
                             List<Boolean> itemsSelection = new ArrayList<>();
                             for (int i = 0; i < listOfEmployee.size(); i++) {
                                 itemsSelection.add(false);
-                                if(i == listOfEmployee.size() -1) {
+                                if (i == listOfEmployee.size() - 1) {
                                     for (int j = 0; j < event.getToEmployee().size(); j++) {
                                         int index = listOfEmployee.indexOf(event.getToEmployee().get(j));
                                         if (index > -1) {

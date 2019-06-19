@@ -44,7 +44,7 @@
             android:id="@+id/nav_employee"
             android:icon="@drawable/ic_employee"
             android:title="Employee" />
-        </group>
+    </group>
 
     <item android:title="Settings">
         <menu>

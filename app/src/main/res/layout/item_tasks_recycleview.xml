@@ -3,9 +3,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:background="?android:attr/selectableItemBackground"
     android:orientation="vertical">
 
     <!-- A CardView that contains a Images and texts -->
@@ -32,13 +32,13 @@
                 android:layout_marginLeft="5dp">
 
                 <LinearLayout
+                    android:id="@+id/layout_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:id="@+id/layout_title"
-                    android:layout_marginLeft="2dp"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="2dp"
-                    android:layout_alignParentTop="true">
+                    android:layout_marginLeft="2dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tvTitle"
@@ -50,14 +50,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_from"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@id/layout_title"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/layout_from"
+                    android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginStart="2dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -76,14 +76,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_to"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@id/layout_from"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/layout_to"
+                    android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginStart="2dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -102,14 +102,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@id/layout_to"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/layout_date"
+                    android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginStart="2dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -132,6 +132,7 @@
                         android:singleLine="true"
                         android:text=" TO "
                         android:textSize="14sp" />
+
                     <TextView
                         android:id="@+id/tvToDate"
                         android:layout_width="wrap_content"
@@ -142,14 +143,14 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/layout_area"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_below="@id/layout_date"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/layout_area"
+                    android:layout_marginStart="2dp"
                     android:layout_marginLeft="2dp"
-                    android:layout_marginStart="2dp">
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -162,9 +163,9 @@
                         android:id="@+id/tvDetails"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:maxLines="2"
                         android:singleLine="true"
                         android:textSize="17sp"
-                        android:maxLines="2"
                         android:textStyle="bold" />
                 </LinearLayout>
 

@@ -105,6 +105,6 @@ public class Employee {
 
     @Override
     public boolean equals(@Nullable Object obj) {
-        return this.getEmail().equalsIgnoreCase(((Employee)obj).getEmail());
+        return this.getEmail().equalsIgnoreCase(((Employee) obj).getEmail());
     }
 }

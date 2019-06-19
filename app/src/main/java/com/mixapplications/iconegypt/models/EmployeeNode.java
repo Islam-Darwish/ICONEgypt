@@ -126,7 +126,7 @@ public class EmployeeNode {
         }
 
         for (EmployeeNode employeeNode : listOfNodes) {
-            Query fireQuery =  ref.child("employees").orderByChild("email").equalTo(employeeNode.getEmail());
+            Query fireQuery = ref.child("employees").orderByChild("email").equalTo(employeeNode.getEmail());
             fireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot1) {

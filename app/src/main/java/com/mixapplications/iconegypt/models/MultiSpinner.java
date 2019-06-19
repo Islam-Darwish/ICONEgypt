@@ -111,18 +111,18 @@ public class MultiSpinner extends AppCompatSpinner implements
         int count = 0;
         for (int i = 0; i < selected.length; i++) {
             selected[i] = itemsSelection.get(i);
-            if(itemsSelection.get(i)){
-                if(text.equalsIgnoreCase(allText)){
+            if (itemsSelection.get(i)) {
+                if (text.equalsIgnoreCase(allText)) {
                     text = "";
                 }
                 text += itemsNames.get(i) + " , ";
                 count++;
             }
-            if(i == selected.length-1 && text.endsWith(" , ")){
-                text = text.substring(0,text.lastIndexOf(" , "));
+            if (i == selected.length - 1 && text.endsWith(" , ")) {
+                text = text.substring(0, text.lastIndexOf(" , "));
             }
         }
-        if(count >= selected.length){
+        if (count >= selected.length) {
             text = allText;
         }
 

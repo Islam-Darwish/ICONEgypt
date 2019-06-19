@@ -74,10 +74,10 @@ public class SentEventsAdapter extends RecyclerView.Adapter<SentEventsAdapter.My
         holder.btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AppData.myEmployeeNode.getChildren().size()> 0)
+                if (AppData.myEmployeeNode.getChildren().size() > 0)
                     new CreateEventCustomDialog(ref, activity, context, arrayEvents.get(position)).show();
                 else
-                    Toast.makeText(context,"Sorry you can not create Event" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Sorry you can not create Event", Toast.LENGTH_LONG).show();
             }
         });
         holder.btnRemove.setOnClickListener(new View.OnClickListener() {

@@ -294,8 +294,6 @@ public class SelectActivity extends AppCompatActivity
                     });
 
 
-
-
                     Query cFireQuery = ref.child("events").orderByChild("timestamp");
                     cFireQuery.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -501,7 +499,7 @@ public class SelectActivity extends AppCompatActivity
             setFragment(new EmployeeFragment(), true, "employee_fragment");
         } else if (id == R.id.nav_events) {
             setFragment(new EventsFragment(), true, "events_fragment");
-        }  else if (id == R.id.nav_task) {
+        } else if (id == R.id.nav_task) {
             setFragment(new TasksFragment(), true, "tasks_fragment");
         } else if (id == R.id.nav_signout) {
             signOut();

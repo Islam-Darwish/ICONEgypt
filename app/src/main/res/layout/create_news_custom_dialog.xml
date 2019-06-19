@@ -10,73 +10,75 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginLeft="5dp">
 
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="5dp"
-            android:id="@+id/layout_from"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp">
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp">
 
-            <TextView
+
+            <LinearLayout
+                android:id="@+id/layout_from"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Title : "
+                    android:textSize="17sp" />
+
+                <EditText
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Title Here."
+                    android:singleLine="true"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layout_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_from"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/tvNews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Write something here..."
+                    android:minLines="4"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:text="Title : "
-                android:textSize="17sp" />
+                android:layout_below="@id/layout_news"
+                android:text="Cancel" />
 
-            <EditText
-                android:id="@+id/tvTitle"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/btn_share"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                android:textSize="17sp"
-                android:textStyle="bold"
-                android:hint="Enter Title Here."/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_below="@id/layout_from"
-            android:id="@+id/layout_news"
-            android:layout_marginLeft="2dp"
-            android:layout_marginStart="2dp">
-
-            <EditText
-                android:id="@+id/tvNews"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minLines="4"
-                android:textSize="16sp"
-                android:hint="Write something here..."/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_news"
-            android:text="Cancel"/>
-        <Button
-            android:id="@+id/btn_share"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_news"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="Share"/>
-    </RelativeLayout>
+                android:layout_below="@id/layout_news"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:text="Share" />
+        </RelativeLayout>
     </ScrollView>
 </androidx.cardview.widget.CardView>

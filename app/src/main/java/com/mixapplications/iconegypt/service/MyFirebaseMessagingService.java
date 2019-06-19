@@ -14,8 +14,6 @@ import android.service.notification.StatusBarNotification;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -124,15 +122,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             database = FirebaseDatabase.getInstance();
             ref = database.getReference();
             final long timestamp;
-                timestamp = Long.parseLong(remoteMessage.getData().get("timestamp"));
-            if(timestamp != 0){
+            timestamp = Long.parseLong(remoteMessage.getData().get("timestamp"));
+            if (timestamp != 0) {
                 Query query = ref.child("events").orderByChild("timestamp").equalTo(timestamp);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             final Events event = snapshot.getValue(Events.class);
-                            if(event != null){
+                            if (event != null) {
                                 if (remoteMessage.getData().get("fromEmployee") != null &&
                                         currentUser != null &&
                                         !remoteMessage.getData().get("fromEmployee").equalsIgnoreCase(currentUser.getEmail())) {

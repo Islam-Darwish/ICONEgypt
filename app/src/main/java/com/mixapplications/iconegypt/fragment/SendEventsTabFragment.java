@@ -67,10 +67,10 @@ public class SendEventsTabFragment extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(AppData.myEmployeeNode.getChildren().size()> 0)
-                new CreateEventCustomDialog(ref, activity, context, null).show();
+                if (AppData.myEmployeeNode.getChildren().size() > 0)
+                    new CreateEventCustomDialog(ref, activity, context, null).show();
                 else
-                    Toast.makeText(context,"Sorry you can not create Event" , Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Sorry you can not create Event", Toast.LENGTH_LONG).show();
             }
         });
 

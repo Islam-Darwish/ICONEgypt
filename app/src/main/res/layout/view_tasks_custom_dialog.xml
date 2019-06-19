@@ -8,9 +8,11 @@
     card_view:cardBackgroundColor="@color/cardview_light_background"
     card_view:cardCornerRadius="4dp"
     card_view:contentPadding="10dp">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -18,13 +20,13 @@
             android:layout_marginLeft="5dp">
 
             <LinearLayout
+                android:id="@+id/layout_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/layout_title"
-                android:layout_marginLeft="2dp"
+                android:layout_alignParentTop="true"
                 android:layout_marginStart="2dp"
-                android:layout_alignParentTop="true">
+                android:layout_marginLeft="2dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tvTitle"
@@ -36,14 +38,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_from"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_below="@id/layout_title"
-                android:layout_marginTop="5dp"
-                android:id="@+id/layout_from"
+                android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginStart="2dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -62,14 +64,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_to"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_below="@id/layout_from"
-                android:layout_marginTop="5dp"
-                android:id="@+id/layout_to"
+                android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginStart="2dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -88,14 +90,14 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_below="@id/layout_to"
-                android:layout_marginTop="5dp"
-                android:id="@+id/layout_date"
+                android:layout_marginStart="2dp"
                 android:layout_marginLeft="2dp"
-                android:layout_marginStart="2dp">
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -118,6 +120,7 @@
                     android:singleLine="true"
                     android:text=" TO "
                     android:textSize="17sp" />
+
                 <TextView
                     android:id="@+id/tvToDate"
                     android:layout_width="wrap_content"
@@ -128,22 +131,24 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/layout_tasks"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/layout_date"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_below="@id/layout_date"
-                android:id="@+id/layout_tasks">
+                android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Details : "/>
+                    android:text="Details : " />
+
                 <TextView
                     android:id="@+id/tvTask"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <Button
@@ -151,9 +156,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/layout_tasks"
-                android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:text="Close"/>
+                android:layout_alignParentRight="true"
+                android:text="Close" />
         </RelativeLayout>
 
     </ScrollView>
