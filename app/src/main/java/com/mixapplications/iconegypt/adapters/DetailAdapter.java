@@ -31,7 +31,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CustomView
     Activity activity;
     private ArrayList<Employee> arrayDetails;
 
-33333333333333
     public DetailAdapter(Context context, Activity activity, ArrayList<Employee> arrayDetails) {
         this.arrayDetails = arrayDetails;
         this.context = context;
