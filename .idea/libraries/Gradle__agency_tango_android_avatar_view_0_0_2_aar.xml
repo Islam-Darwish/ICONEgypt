@@ -1,12 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: agency.tango.android:avatar-view:0.0.2@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ceff3ceac8701de0a4ea2068252fcc1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5ceff3ceac8701de0a4ea2068252fcc1/res" />
+      <root url="jar://D:/Android-Gradle/caches/transforms-2/files-2.1/90a0faf0dd9ed060b563f83cf79f718e/jetified-avatar-view-0.0.2/jars/classes.jar!/" />
+      <root url="file://D:/Android-Gradle/caches/transforms-2/files-2.1/90a0faf0dd9ed060b563f83cf79f718e/jetified-avatar-view-0.0.2/res" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://D:/Android-Gradle/caches/modules-2/files-2.1/agency.tango.android/avatar-view/0.0.2/464e222e4fdd4076a67033b9383f6352eb61846a/avatar-view-0.0.2-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/agency.tango.android/avatar-view/0.0.2/77b88b936c65c74477f139a7bbc18a1654dfed8e/avatar-view-0.0.2-sources.jar!/" />
+      <root url="jar://D:/Android-Gradle/caches/modules-2/files-2.1/agency.tango.android/avatar-view/0.0.2/77b88b936c65c74477f139a7bbc18a1654dfed8e/avatar-view-0.0.2-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
